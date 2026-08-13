@@ -105,6 +105,8 @@ const val LP3_KEYBOARD_HEIGHT_DP = 164
 const val STANDARD_KEY_WIDTH_DP = 35
 const val ICON_KEY_WIDTH_DP = STANDARD_KEY_WIDTH_DP + 14
 const val MEDIUM_KEY_WIDTH_DP = STANDARD_KEY_WIDTH_DP + 8
+// 11-key rows (e.g. Swedish qwertyuiopå) must fit the 360dp screen: 11 * 32 = 352
+const val NARROW_KEY_WIDTH_DP = 32
 const val STANDARD_ROW_HEIGHT_DP = 44
 const val STANDARD_KEY_TEXT_SP = 25
 const val MINIMUM_SWIPE_DP = 40
@@ -577,9 +579,10 @@ fun ColumnScope.FirstRow(
     swipeConfig: SwipeConfig?,
     enableKeyAnimation: Boolean
 ) {
+    val keyWidth = if (characters.length > 10) NARROW_KEY_WIDTH_DP.dp else STANDARD_KEY_WIDTH_DP.dp
     DefaultRow {
         for (char in characters) {
-            Key(char, callback, swipeConfig, enableKeyAnimation)
+            Key(char.code, callback, swipeConfig, enableKeyAnimation, width = keyWidth)
         }
     }
 }

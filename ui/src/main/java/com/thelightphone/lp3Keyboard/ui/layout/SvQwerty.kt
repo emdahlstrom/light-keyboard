@@ -4,7 +4,7 @@ import androidx.compose.ui.geometry.Rect
 import com.thelightphone.lp3Keyboard.ui.Lp3KeyboardLayoutCapture
 
 private val SvQwertySwipeConfig: SwipeConfig by lazy {
-    object : Lp3KeyboardLayoutCapture(NordicQwerty.SWIPE_ALPHABET) {
+    object : Lp3KeyboardLayoutCapture(NordicQwerty.SWEDISH_FINNISH_ALPHABET) {
         override fun report(code: Int, bounds: Rect) {
             val lower = code.toChar().lowercaseChar()
             if (lower !in letters) return

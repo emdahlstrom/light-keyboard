@@ -28,8 +28,11 @@ import com.thelightphone.lp3Keyboard.ui.SpecialKey
  * the home row, giving two 11-key rows over a 7-key row. That holds for the national desktop
  * standards (SFS 5966 in Finland), for the AOSP/Gboard "nordic" soft keyboard, and for iOS —
  * so the geometry lives here once and each locale only supplies its own [SwipeConfig] and its
- * own long-press sets. Danish and Norwegian use æ ø in place of ö ä and would need their own
- * rows rather than this object.
+ * own long-press sets.
+ *
+ * Danish (`…klæø`) and Norwegian (`…kløæ`) share this top and bottom row and differ only in
+ * those last two home-row keys, so they would fit here once the home row becomes a parameter —
+ * along with the alphabet below, which is not the one they collate.
  */
 object NordicQwerty {
     const val TOP_ROW = "qwertyuiopå"
@@ -40,8 +43,11 @@ object NordicQwerty {
     const val HOME_ROW_UPPER = "ASDFGHJKLÖÄ"
     const val BOTTOM_ROW_UPPER = "ZXCVBNM"
 
-    /** The Nordic alphabet a swipe decoder is fed, in collation order. */
-    const val SWIPE_ALPHABET = "abcdefghijklmnopqrstuvwxyzåäö"
+    /**
+     * The Swedish and Finnish alphabet a swipe decoder is fed, in collation order. It is not
+     * pan-Nordic: Danish and Norwegian close the alphabet with æ ø å instead.
+     */
+    const val SWEDISH_FINNISH_ALPHABET = "abcdefghijklmnopqrstuvwxyzåäö"
 
     /** Lower case, with the shift key idle. */
     fun lowerCaseLayout(swipeConfig: SwipeConfig): Layout = NordicLayout(

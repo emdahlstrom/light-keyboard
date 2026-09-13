@@ -75,8 +75,15 @@ object EnShared {
         }
     }
 
-    class ExtendedCharKeyboard(rootCode: Int) : Layout {
-        private val rows = extendedCharMapping[rootCode]
+    /**
+     * The long-press menu for [rootCode]. [mapping] defaults to the shared English set; a
+     * locale whose orthography needs a different set (or a different order) passes its own.
+     */
+    class ExtendedCharKeyboard(
+        rootCode: Int,
+        mapping: Map<Int, List<List<Char>>> = extendedCharMapping
+    ) : Layout {
+        val rows = mapping[rootCode]
 
         @Composable
         override fun ColumnScope.Render(

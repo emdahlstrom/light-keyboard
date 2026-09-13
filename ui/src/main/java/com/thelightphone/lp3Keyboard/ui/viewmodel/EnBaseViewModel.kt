@@ -91,6 +91,13 @@ abstract class EnBaseViewModel<SwipeResult>(
         )
     }
 
+    /**
+     * The long-press menus this keyboard offers. Locales override it when their orthography
+     * differs from the shared English set — see FiQwerty.extendedCharMapping.
+     */
+    protected open val extendedCharMapping: Map<Int, List<List<Char>>>
+        get() = EnShared.extendedCharMapping
+
     protected open fun isOnSymbolsOrNumbers() =
         layoutFlow.value is EnShared.SymbolsLayout || layoutFlow.value is EnShared.NumberLayout
 
@@ -209,9 +216,10 @@ abstract class EnBaseViewModel<SwipeResult>(
 
     override fun onKeyLongPressed(code: Int) {
         heldKeys[code]?.cancel()
-        if (EnShared.extendedCharMapping.containsKey(code)) {
+        val mapping = extendedCharMapping
+        if (mapping.containsKey(code)) {
             haptic()
-            setLayout(EnShared.ExtendedCharKeyboard(code))
+            setLayout(EnShared.ExtendedCharKeyboard(code, mapping))
             heldKeys[code] = viewModelScope.launch { }
             return
         }

@@ -36,4 +36,7 @@ class SvQwertyLp3KeyboardViewModel<SwipeResult>(
     lowerCaseLayout = SvQwerty.LowerCaseLayout,
     upperCaseLayout = SvQwerty.UpperCaseLayout,
     capsLockedLayout = SvQwerty.CapsLockedLayout,
-)
+) {
+    override val extendedCharMapping: Map<Int, List<List<Char>>>
+        get() = SvQwerty.extendedCharMapping
+}

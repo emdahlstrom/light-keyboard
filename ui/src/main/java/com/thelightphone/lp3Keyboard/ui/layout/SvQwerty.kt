@@ -64,6 +64,14 @@ private fun ColumnScope.SvThirdRow(
 
 /** The layouts for Swedish QWERTY. */
 object SvQwerty {
+    // ö and ä long-press to their danish/norwegian counterparts
+    val extendedCharMapping = EnShared.extendedCharMapping + mapOf(
+        'ö'.code to listOf(listOf('ø', 'œ')),
+        'Ö'.code to listOf(listOf('Ø', 'Œ')),
+        'ä'.code to listOf(listOf('æ')),
+        'Ä'.code to listOf(listOf('Æ')),
+    )
+
     object LowerCaseLayout : Layout {
         override val isRootLayout: Boolean
             get() = true

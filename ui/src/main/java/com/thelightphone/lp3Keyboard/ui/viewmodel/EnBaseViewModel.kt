@@ -91,6 +91,9 @@ abstract class EnBaseViewModel<SwipeResult>(
         )
     }
 
+    protected open val extendedCharMapping: Map<Int, List<List<Char>>>
+        get() = EnShared.extendedCharMapping
+
     protected open fun isOnSymbolsOrNumbers() =
         layoutFlow.value is EnShared.SymbolsLayout || layoutFlow.value is EnShared.NumberLayout
 
@@ -209,9 +212,14 @@ abstract class EnBaseViewModel<SwipeResult>(
 
     override fun onKeyLongPressed(code: Int) {
         heldKeys[code]?.cancel()
-        if (EnShared.extendedCharMapping.containsKey(code)) {
+        val rows = extendedCharMapping[code]
+        if (rows != null) {
             haptic()
-            setLayout(EnShared.ExtendedCharKeyboard(code))
+            // a popup opened from inside another popup should still return to the letters
+            val rootLayout =
+                previousLayout.takeIf { layoutFlow.value is EnShared.ExtendedCharKeyboard }
+            setLayout(EnShared.ExtendedCharKeyboard(rows))
+            if (rootLayout != null) previousLayout = rootLayout
             heldKeys[code] = viewModelScope.launch { }
             return
         }

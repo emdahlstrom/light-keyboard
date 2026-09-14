@@ -71,7 +71,15 @@ class SvQwertyViewModelTest {
     }
 
     @Test
-    fun `a popup opened inside another popup returns to the letters after a pick`() {
+    fun `letters with their own swedish keys are left out of the other popups`() {
+        val map = SvQwerty.extendedCharMapping
+        assertEquals(listOf(listOf('à', 'á', 'â', 'æ'), listOf('ã', 'ā', 'ă', 'ą')), map['a'.code])
+        assertEquals(listOf(listOf('À', 'Á', 'Â', 'Æ'), listOf('Ã', 'Ā', 'Ă', 'Ą')), map['A'.code])
+        assertEquals(listOf(listOf('ô', 'ò', 'ó', 'œ', 'ø', 'ō', 'õ')), map['o'.code])
+    }
+
+    @Test
+    fun `a popup opened while another popup is showing returns to the letters after a pick`() {
         vm.onKeyPressed('o'.code)
         vm.onKeyLongPressed('o'.code)
         vm.onKeyReleased('o'.code)

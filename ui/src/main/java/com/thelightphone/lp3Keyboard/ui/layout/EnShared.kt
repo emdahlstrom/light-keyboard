@@ -75,8 +75,11 @@ object EnShared {
         }
     }
 
-    class ExtendedCharKeyboard(rootCode: Int) : Layout {
-        private val rows = extendedCharMapping[rootCode]
+    class ExtendedCharKeyboard @JvmOverloads constructor(
+        rootCode: Int,
+        mapping: Map<Int, List<List<Char>>> = extendedCharMapping,
+    ) : Layout {
+        private val rows = mapping[rootCode]
 
         @Composable
         override fun ColumnScope.Render(

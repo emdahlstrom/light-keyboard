@@ -78,6 +78,16 @@ class SvQwertyViewModelTest {
     }
 
     @Test
+    fun `é comes first on e and keeps the other shared accents`() {
+        for (key in listOf('e', 'E')) {
+            val swedish = SvQwerty.extendedCharMapping.getValue(key.code).flatten()
+            val shared = EnShared.extendedCharMapping.getValue(key.code).flatten()
+            assertEquals(if (key == 'e') 'é' else 'É', swedish.first())
+            assertEquals(shared.toSet(), swedish.toSet())
+        }
+    }
+
+    @Test
     fun `every popup fits the keyboard`() {
         for (mapping in listOf(EnShared.extendedCharMapping, SvQwerty.extendedCharMapping)) {
             for (rows in mapping.values) {

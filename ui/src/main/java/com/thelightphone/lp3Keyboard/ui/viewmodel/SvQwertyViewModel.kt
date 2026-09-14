@@ -36,4 +36,5 @@ class SvQwertyLp3KeyboardViewModel<SwipeResult>(
     lowerCaseLayout = SvQwerty.LowerCaseLayout,
     upperCaseLayout = SvQwerty.UpperCaseLayout,
     capsLockedLayout = SvQwerty.CapsLockedLayout,
+    extendedCharMapping = SvQwerty.extendedCharMapping,
 )

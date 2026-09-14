@@ -64,6 +64,16 @@ private fun ColumnScope.SvThirdRow(
 
 /** The layouts for Swedish QWERTY. */
 object SvQwerty {
+    // å ä ö have their own keys, so leave them out of other popups; ö and ä get ø and æ
+    internal val extendedCharMapping = EnShared.extendedCharMapping.mapValues { (_, rows) ->
+        rows.map { row -> row.filterNot { it in "åäöÅÄÖ" } }.filter { it.isNotEmpty() }
+    } + mapOf(
+        'ö'.code to listOf(listOf('ø', 'œ')),
+        'Ö'.code to listOf(listOf('Ø', 'Œ')),
+        'ä'.code to listOf(listOf('æ')),
+        'Ä'.code to listOf(listOf('Æ')),
+    )
+
     object LowerCaseLayout : Layout {
         override val isRootLayout: Boolean
             get() = true

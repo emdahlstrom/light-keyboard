@@ -23,11 +23,14 @@ import com.thelightphone.lp3Keyboard.ui.SecondRow
 import com.thelightphone.lp3Keyboard.ui.SpecialKey
 import com.thelightphone.lp3Keyboard.ui.ThirdRow
 import com.thelightphone.lp3Keyboard.ui.viewmodel.BeAzertyLp3KeyboardViewModel
+import com.thelightphone.lp3Keyboard.ui.viewmodel.DaQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.EnColemakLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.EnQwertyLp3KeyboardViewModel
+import com.thelightphone.lp3Keyboard.ui.viewmodel.FiQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.FrAzertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.Lp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.Lp3RepeatableKeyboardCallback
+import com.thelightphone.lp3Keyboard.ui.viewmodel.NoQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.SvQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.defaultEmojis
 import kotlinx.coroutines.flow.Flow
@@ -44,7 +47,10 @@ enum class LayoutRegistryItem(
     EnColemak(Locale.ENGLISH, "colemak", "Colemak (English)"),
     FrAzerty(Locale.FRENCH, "azerty", "AZERTY (French)"),
     BeAzerty(Locale("nl", "BE"), "azerty", "AZERTY (Belgium)"),
-    SvQwerty(Locale.forLanguageTag("sv"), "qwerty", "QWERTY (Swedish)")
+    SvQwerty(Locale.forLanguageTag("sv"), "qwerty", "QWERTY (Swedish)"),
+    FiQwerty(Locale.forLanguageTag("fi"), "qwerty", "QWERTY (Finnish)"),
+    DaQwerty(Locale.forLanguageTag("da"), "qwerty", "QWERTY (Danish)"),
+    NoQwerty(Locale.forLanguageTag("no"), "qwerty", "QWERTY (Norwegian)")
     ;
 
     val uniqueId: String = "${locale}_$variant"
@@ -90,6 +96,27 @@ fun <SwipeResultType> LayoutRegistryItem.buildRootViewModel(
         )
 
         LayoutRegistryItem.SvQwerty -> SvQwertyLp3KeyboardViewModel(
+            passedCallback,
+            swipeCallback,
+            haptic,
+            optionsForLayout
+        )
+
+        LayoutRegistryItem.FiQwerty -> FiQwertyLp3KeyboardViewModel(
+            passedCallback,
+            swipeCallback,
+            haptic,
+            optionsForLayout
+        )
+
+        LayoutRegistryItem.DaQwerty -> DaQwertyLp3KeyboardViewModel(
+            passedCallback,
+            swipeCallback,
+            haptic,
+            optionsForLayout
+        )
+
+        LayoutRegistryItem.NoQwerty -> NoQwertyLp3KeyboardViewModel(
             passedCallback,
             swipeCallback,
             haptic,

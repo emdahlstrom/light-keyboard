@@ -2,6 +2,7 @@ package com.thelightphone.lp3Keyboard.ui
 
 import com.thelightphone.lp3Keyboard.ui.layout.DaQwerty
 import com.thelightphone.lp3Keyboard.ui.layout.FiQwerty
+import com.thelightphone.lp3Keyboard.ui.layout.IsQwerty
 import com.thelightphone.lp3Keyboard.ui.layout.LayoutRegistryItem
 import com.thelightphone.lp3Keyboard.ui.layout.NoQwerty
 import com.thelightphone.lp3Keyboard.ui.layout.SvQwerty
@@ -30,6 +31,7 @@ class LayoutRegistryItemTest {
             LayoutRegistryItem.FiQwerty to (FiQwerty.LowerCaseLayout to FiQwerty.UpperCaseLayout),
             LayoutRegistryItem.DaQwerty to (DaQwerty.LowerCaseLayout to DaQwerty.UpperCaseLayout),
             LayoutRegistryItem.NoQwerty to (NoQwerty.LowerCaseLayout to NoQwerty.UpperCaseLayout),
+            LayoutRegistryItem.IsQwerty to (IsQwerty.LowerCaseLayout to IsQwerty.UpperCaseLayout),
         )
         for ((item, expected) in layouts) {
             val vm = item.buildRootViewModel(callback, swipeCallback)

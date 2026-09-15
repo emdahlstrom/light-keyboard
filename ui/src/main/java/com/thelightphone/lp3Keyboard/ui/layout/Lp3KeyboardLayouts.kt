@@ -28,6 +28,7 @@ import com.thelightphone.lp3Keyboard.ui.viewmodel.EnColemakLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.EnQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.FiQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.FrAzertyLp3KeyboardViewModel
+import com.thelightphone.lp3Keyboard.ui.viewmodel.IsQwertyLp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.Lp3KeyboardViewModel
 import com.thelightphone.lp3Keyboard.ui.viewmodel.Lp3RepeatableKeyboardCallback
 import com.thelightphone.lp3Keyboard.ui.viewmodel.NoQwertyLp3KeyboardViewModel
@@ -50,7 +51,8 @@ enum class LayoutRegistryItem(
     SvQwerty(Locale.forLanguageTag("sv"), "qwerty", "QWERTY (Swedish)"),
     FiQwerty(Locale.forLanguageTag("fi"), "qwerty", "QWERTY (Finnish)"),
     DaQwerty(Locale.forLanguageTag("da"), "qwerty", "QWERTY (Danish)"),
-    NoQwerty(Locale.forLanguageTag("no"), "qwerty", "QWERTY (Norwegian)")
+    NoQwerty(Locale.forLanguageTag("no"), "qwerty", "QWERTY (Norwegian)"),
+    IsQwerty(Locale.forLanguageTag("is"), "qwerty", "QWERTY (Icelandic)")
     ;
 
     val uniqueId: String = "${locale}_$variant"
@@ -117,6 +119,13 @@ fun <SwipeResultType> LayoutRegistryItem.buildRootViewModel(
         )
 
         LayoutRegistryItem.NoQwerty -> NoQwertyLp3KeyboardViewModel(
+            passedCallback,
+            swipeCallback,
+            haptic,
+            optionsForLayout
+        )
+
+        LayoutRegistryItem.IsQwerty -> IsQwertyLp3KeyboardViewModel(
             passedCallback,
             swipeCallback,
             haptic,

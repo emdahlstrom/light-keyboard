@@ -157,10 +157,10 @@ object EnShared {
             listOf('û', 'ü', 'ù', 'ú', 'ū'),
         ),
         'Y'.code to listOf(
-            listOf('Ÿ'),
+            listOf('Ý', 'Ÿ'),
         ),
         'y'.code to listOf(
-            listOf('ÿ'),
+            listOf('ý', 'ÿ'),
         ),
         'Z'.code to listOf(
             listOf('Ž', 'Ź', 'Ż'),

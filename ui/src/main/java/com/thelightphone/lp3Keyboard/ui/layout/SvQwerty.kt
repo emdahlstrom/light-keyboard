@@ -1,23 +1,20 @@
 package com.thelightphone.lp3Keyboard.ui.layout
 
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.unit.dp
-import com.thelightphone.lp3Keyboard.ui.DefaultRow
 import com.thelightphone.lp3Keyboard.ui.FinalRow
 import com.thelightphone.lp3Keyboard.ui.FirstRow
 import com.thelightphone.lp3Keyboard.ui.ICON_KEY_WIDTH_DP
 import com.thelightphone.lp3Keyboard.ui.IconKey
-import com.thelightphone.lp3Keyboard.ui.Key
 import com.thelightphone.lp3Keyboard.ui.KeyboardOptions
 import com.thelightphone.lp3Keyboard.ui.Lp3KeyboardCallback
 import com.thelightphone.lp3Keyboard.ui.Lp3KeyboardLayoutCapture
 import com.thelightphone.lp3Keyboard.ui.MultiLabelKey
-import com.thelightphone.lp3Keyboard.ui.NARROW_KEY_WIDTH_DP
+import com.thelightphone.lp3Keyboard.ui.NarrowThirdRow
 import com.thelightphone.lp3Keyboard.ui.R
 import com.thelightphone.lp3Keyboard.ui.SecondRow
 import com.thelightphone.lp3Keyboard.ui.SpecialKey
@@ -32,32 +29,6 @@ private val SvQwertySwipeConfig: SwipeConfig by lazy {
             if (letterBounds[lower.code] == bounds) return
             letterBounds[lower.code] = bounds
         }
-    }
-}
-
-
-/** Third row at the same 32dp key pitch as the 11-key rows above, so the grid keeps one rhythm. */
-@Composable
-private fun ColumnScope.SvThirdRow(
-    characters: String,
-    callback: Lp3KeyboardCallback,
-    swipeConfig: SwipeConfig?,
-    options: KeyboardOptions,
-    leftButton: @Composable RowScope.() -> Unit
-) {
-    DefaultRow {
-        leftButton()
-        for (char in characters) {
-            Key(char.code, callback, swipeConfig, options.enableKeyAnimation, width = NARROW_KEY_WIDTH_DP.dp)
-        }
-        IconKey(
-            R.drawable.back_lp3,
-            SpecialKey.Backspace,
-            callback,
-            options.enableKeyAnimation,
-            width = ICON_KEY_WIDTH_DP.dp,
-            modifier = Modifier.padding(10.dp).padding(start = 8.dp, bottom = 6.dp)
-        )
     }
 }
 
@@ -78,7 +49,7 @@ object SvQwerty {
         ) {
             FirstRow("qwertyuiopå", callback, swipeConfig, options.enableKeyAnimation)
             SecondRow("asdfghjklöä", callback, swipeConfig, options.enableKeyAnimation)
-            SvThirdRow("zxcvbnm", callback, swipeConfig, options) {
+            NarrowThirdRow("zxcvbnm", callback, swipeConfig, options) {
                 IconKey(
                     R.drawable.up_lp3,
                     SpecialKey.UpCase,
@@ -107,7 +78,7 @@ object SvQwerty {
         ) {
             FirstRow("QWERTYUIOPÅ", callback, swipeConfig, options.enableKeyAnimation)
             SecondRow("ASDFGHJKLÖÄ", callback, swipeConfig, options.enableKeyAnimation)
-            SvThirdRow("ZXCVBNM", callback, swipeConfig, options) {
+            NarrowThirdRow("ZXCVBNM", callback, swipeConfig, options) {
                 IconKey(
                     R.drawable.caps_lp3,
                     SpecialKey.DownCase,
@@ -136,7 +107,7 @@ object SvQwerty {
         ) {
             FirstRow("QWERTYUIOPÅ", callback, swipeConfig, options.enableKeyAnimation)
             SecondRow("ASDFGHJKLÖÄ", callback, swipeConfig, options.enableKeyAnimation)
-            SvThirdRow("ZXCVBNM", callback, swipeConfig, options) {
+            NarrowThirdRow("ZXCVBNM", callback, swipeConfig, options) {
                 IconKey(
                     R.drawable.down_lp3,
                     SpecialKey.DownCase,

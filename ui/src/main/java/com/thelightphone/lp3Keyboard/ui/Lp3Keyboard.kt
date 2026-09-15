@@ -629,6 +629,31 @@ fun ColumnScope.ThirdRow(
     }
 }
 
+/** Third row at the same 32dp key pitch as the 11-key rows above, so the grid keeps one rhythm. */
+@Composable
+internal fun ColumnScope.NarrowThirdRow(
+    characters: String,
+    callback: Lp3KeyboardCallback,
+    swipeConfig: SwipeConfig?,
+    options: KeyboardOptions,
+    leftButton: @Composable RowScope.() -> Unit
+) {
+    DefaultRow {
+        leftButton()
+        for (char in characters) {
+            Key(char.code, callback, swipeConfig, options.enableKeyAnimation, width = NARROW_KEY_WIDTH_DP.dp)
+        }
+        IconKey(
+            R.drawable.back_lp3,
+            SpecialKey.Backspace,
+            callback,
+            options.enableKeyAnimation,
+            width = ICON_KEY_WIDTH_DP.dp,
+            modifier = Modifier.padding(10.dp).padding(start = 8.dp, bottom = 6.dp)
+        )
+    }
+}
+
 @Composable
 fun ColumnScope.FinalRow(
     options: KeyboardOptions,
